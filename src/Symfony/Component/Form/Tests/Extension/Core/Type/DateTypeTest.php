@@ -271,6 +271,18 @@ class DateTypeTest extends TypeTestCase
         $this->assertEquals('06*2010*02', $form->getViewData());
     }
 
+    public function testDatePatternWithFormatOption()
+    {
+        $form = $this->factory->create('date', null, array(
+            'format' => 'dMy',
+            'widget' => 'text'
+        ));
+
+        $view = $form->createView();
+
+        $this->assertEquals('{{ day }}{{ month }}{{ year }}', $view->vars['date_pattern']);
+    }
+
     /**
      * This test is to check that the strings '0', '1', '2', '3' are no accepted
      * as valid IntlDateFormatter constants for FULL, LONG, MEDIUM or SHORT respectively.
